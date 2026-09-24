@@ -155,7 +155,7 @@ export default function App() {
   const totalXP = quests.reduce((acc, q) => acc + (q.completed ? q.xp : 0), 0);
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${darkMode ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
+    <div className={`min-h-screen transition-colors duration-200 ${darkMode ? 'dark bg-[#141416] text-stone-100' : 'bg-[#FAF9F6] text-stone-900'}`}>
       
       {/* Top Navigation */}
       <Navbar

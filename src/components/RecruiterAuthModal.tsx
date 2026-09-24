@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { soundFX } from '../utils/audio';
 import { RecruiterUser } from '../types';
-import { Shield, Lock, Key, CheckCircle, AlertCircle, X, Unlock, UserCheck, Phone, Mail, Award, Clock } from 'lucide-react';
+import { X, Shield } from 'lucide-react';
 
 interface RecruiterAuthModalProps {
   isOpen: boolean;
@@ -22,7 +22,6 @@ export const RecruiterAuthModal: React.FC<RecruiterAuthModalProps> = ({
 }) => {
   const [accessCode, setAccessCode] = useState('');
   const [company, setCompany] = useState('');
-  const [recruiterName, setRecruiterName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +31,7 @@ export const RecruiterAuthModal: React.FC<RecruiterAuthModalProps> = ({
     soundFX.playClick();
     const finalCode = (codeToUse || accessCode).trim();
     if (!finalCode) {
-      setError('Please provide a recruiter passkey.');
+      setError('Please provide a passkey.');
       return;
     }
 
@@ -46,7 +45,7 @@ export const RecruiterAuthModal: React.FC<RecruiterAuthModalProps> = ({
         body: JSON.stringify({
           accessCode: finalCode,
           company: company || 'Verified Talent Partner',
-          recruiterName: recruiterName || 'Senior Technical Recruiter'
+          recruiterName: 'Technical Recruiter'
         })
       });
 
@@ -63,13 +62,13 @@ export const RecruiterAuthModal: React.FC<RecruiterAuthModalProps> = ({
             verifiedEmail: 'digvijay.ware@mitwpu.edu.in',
             university: 'MIT World Peace University (MIT WPU), Pune',
             degree: 'B.Tech CSE (2024-2028, 3rd Year)',
-            availability: 'Summer 2026 Internships & Early Co-ops'
+            availability: 'Summer 2026 Internships'
           }
         });
       } else {
-        setError(data.message || 'Authentication failed. Please verify code.');
+        setError(data.message || 'Verification failed.');
       }
-    } catch (err: any) {
+    } catch {
       setError('Connection failed. Please retry.');
     } finally {
       setLoading(false);
@@ -77,159 +76,121 @@ export const RecruiterAuthModal: React.FC<RecruiterAuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-lg rounded-3xl bg-slate-900 border border-cyan-500/40 p-6 sm:p-8 shadow-2xl text-slate-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/40 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-md rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-6 shadow-xl text-stone-900 dark:text-stone-100">
         
-        {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-slate-100 hover:bg-slate-700 transition-colors"
-          aria-label="Close Authentication Modal"
+          className="absolute top-4 right-4 p-1.5 rounded-lg text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors"
+          aria-label="Close"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {token && user ? (
-          /* Authenticated State */
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                <UserCheck className="w-6 h-6" />
+          <div className="space-y-5">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#a7c4b5]" />
+              <h3 className="text-base font-normal">Recruiter Access Active</h3>
+            </div>
+
+            <div className="p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 text-xs space-y-2.5 font-mono">
+              <div className="text-[10px] text-stone-400 uppercase">Candidate Protected Dossier</div>
+              <div className="flex justify-between">
+                <span className="text-stone-500">Direct Phone:</span>
+                <a href="tel:+918779877704" className="text-stone-900 dark:text-stone-100 font-semibold hover:underline">+91-8779877704</a>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-slate-100">Verified Recruiter Access Active</h3>
-                <div className="text-xs text-emerald-400 font-mono flex items-center gap-1.5 mt-0.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Session Authenticated &bull; {user.company}</span>
-                </div>
+              <div className="flex justify-between">
+                <span className="text-stone-500">Institution:</span>
+                <span className="text-stone-700 dark:text-stone-300">MIT WPU, Pune</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-stone-500">Availability:</span>
+                <span className="text-[#3d5a49] dark:text-[#a7c4b5]">Summer 2026</span>
               </div>
             </div>
 
-            {/* Confidential Data Cards */}
-            <div className="space-y-3 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 text-xs">
-              <div className="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-wider mb-2">
-                Protected Candidate Dossier Unlocked
-              </div>
-
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
-                <span className="text-slate-400">Direct Verified Phone:</span>
-                <a href="tel:+918779877704" className="font-mono font-bold text-emerald-400 hover:underline">
-                  +91-8779877704
-                </a>
-              </div>
-
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
-                <span className="text-slate-400">Institutional Email:</span>
-                <span className="font-mono text-slate-200">digvijay.ware@mitwpu.edu.in</span>
-              </div>
-
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
-                <span className="text-slate-400">University Standing:</span>
-                <span className="text-slate-200">MIT WPU (3rd Year B.Tech CSE)</span>
-              </div>
-
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
-                <span className="text-slate-400">Hiring Availability:</span>
-                <span className="text-cyan-300 font-medium">Summer 2026 Immediate</span>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <button
                 onClick={onLogout}
-                className="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs border border-slate-700 transition-colors"
+                className="flex-1 py-2 rounded-lg border border-stone-200 dark:border-stone-800 text-xs text-stone-600 dark:text-stone-400 hover:text-stone-900 transition-colors"
               >
-                Sign Out / Revoke Token
+                Sign Out
               </button>
               <button
                 onClick={onClose}
-                className="flex-1 py-3 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs transition-colors"
+                className="flex-1 py-2 rounded-lg bg-stone-900 dark:bg-stone-100 text-stone-100 dark:text-stone-900 text-xs font-medium transition-colors"
               >
                 Done
               </button>
             </div>
           </div>
         ) : (
-          /* Login Form State */
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
-                <Shield className="w-6 h-6" />
+          <div className="space-y-5">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-stone-400" />
+                <h3 className="text-base font-normal">Recruiter Verification</h3>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-slate-100">Recruiter &amp; Partner Authentication</h3>
-                <p className="text-xs text-slate-400">
-                  Cryptographic verification to access protected candidate telemetry &amp; direct contacts.
-                </p>
-              </div>
+              <p className="text-xs text-stone-500 font-light">
+                Sign in with partner passkey to view direct candidate contacts.
+              </p>
             </div>
 
             {error && (
-              <div className="p-3 rounded-xl bg-rose-950/70 border border-rose-500/50 text-rose-300 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                <span>{error}</span>
+              <div className="p-2.5 rounded-lg bg-[#fcd5ce]/30 dark:bg-[#fcd5ce]/15 text-[#6c3b31] dark:text-[#fcd5ce] text-xs font-mono">
+                {error}
               </div>
             )}
 
-            <div className="space-y-3.5">
-              <div>
-                <label className="block text-xs font-mono text-slate-300 mb-1">Company / Hiring Entity</label>
+            <div className="space-y-3 text-xs">
+              <div className="space-y-1">
+                <label className="text-stone-500 font-mono">Company</label>
                 <input
                   type="text"
-                  placeholder="e.g. Google / Microsoft / Razorpay"
+                  placeholder="e.g. Apex Talent"
                   value={company}
                   onChange={e => setCompany(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+                  className="w-full px-3 py-2 rounded-lg border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 focus:outline-none"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-mono text-slate-300 mb-1">Recruiter Passkey / Access Code</label>
+              <div className="space-y-1">
+                <label className="text-stone-500 font-mono">Passkey</label>
                 <input
                   type="password"
-                  placeholder="Enter Passkey (e.g. RECRUITER2026)"
+                  placeholder="Enter code (or use demo below)"
                   value={accessCode}
                   onChange={e => setAccessCode(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 font-mono"
+                  className="w-full px-3 py-2 rounded-lg border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 font-mono focus:outline-none"
                 />
               </div>
             </div>
 
-            {/* Quick Demo Recruiter Passkey CTA */}
-            <div className="p-3 rounded-xl bg-cyan-950/40 border border-cyan-800/40 text-xs text-cyan-300 flex items-center justify-between">
-              <span>Demo Passkey: <code className="font-bold text-cyan-200">RECRUITER2026</code></span>
+            <div className="p-2.5 rounded-lg bg-stone-100 dark:bg-stone-800/40 text-xs font-mono flex items-center justify-between">
+              <span className="text-stone-500">Passkey: RECRUITER2026</span>
               <button
                 type="button"
                 onClick={() => {
                   setAccessCode('RECRUITER2026');
-                  setCompany('Apex Tech Hiring');
                   handleLogin('RECRUITER2026');
                 }}
-                className="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-200 font-mono text-[11px] border border-cyan-500/40 transition-colors"
+                className="text-[#4e3678] dark:text-[#d4c2fc] hover:underline"
               >
-                1-Click Demo Login
+                1-Click Demo
               </button>
             </div>
 
             <button
               onClick={() => handleLogin()}
               disabled={loading}
-              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-xs shadow-lg shadow-cyan-600/25 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+              className="w-full py-2.5 rounded-lg bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-white text-stone-100 dark:text-stone-900 text-xs font-medium transition-colors disabled:opacity-50"
             >
-              {loading ? (
-                <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Verifying Cryptographic Passkey...</span>
-                </span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <Key className="w-4 h-4" />
-                  <span>Authenticate &amp; Unlock Access</span>
-                </span>
-              )}
+              {loading ? 'Verifying...' : 'Sign In'}
             </button>
           </div>
         )}
+
       </div>
     </div>
   );

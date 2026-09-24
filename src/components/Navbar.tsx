@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sun, Moon, FileText, Bot, CheckSquare, Menu, X, Shield, Sparkles } from 'lucide-react';
+import { Sun, Moon, Sparkles, CheckSquare, Shield, Menu, X } from 'lucide-react';
 import { soundFX } from '../utils/audio';
 
 interface NavbarProps {
@@ -26,8 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
     { name: 'Experience', href: '#experience' },
-    { name: 'Certifications', href: '#certifications' },
-    { name: 'Resume PDF', href: '#resume' },
+    { name: 'Resume', href: '#resume' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -37,158 +36,150 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-950/85 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 transition-colors duration-200">
-      {/* Skip to Main Content Link for WCAG Accessibility */}
+    <header className="sticky top-0 z-50 bg-stone-50/85 dark:bg-stone-950/85 backdrop-blur-md border-b border-stone-200/70 dark:border-stone-800/70 transition-colors duration-200">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyan-500 focus:text-slate-950 focus:font-bold focus:rounded-md shadow-lg"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-stone-900 focus:text-stone-100 focus:rounded-lg shadow-sm"
       >
-        Skip to main content
+        Skip to content
       </a>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Brand Logo & Name */}
+          
+          {/* Brand Monogram & Status */}
           <a
             href="#about"
             onClick={handleLinkClick}
-            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded-lg p-1"
+            className="flex items-center gap-2.5 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center">
-                <span className="font-mono font-black text-cyan-400 text-base">DW</span>
-              </div>
+            <div className="w-8 h-8 rounded-lg bg-stone-200 dark:bg-stone-800 flex items-center justify-center text-xs font-mono font-semibold text-stone-700 dark:text-stone-300 group-hover:bg-[#a7c4b5]/30 transition-colors">
+              DW
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-slate-100 text-sm tracking-tight group-hover:text-cyan-400 transition-colors">
-                  Digvijay Madhav Ware
-                </span>
-                <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse" />
-                  Available 2026
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400 font-mono">B.Tech CSE @ MIT WPU, Pune</p>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-stone-900 dark:text-stone-100 text-sm tracking-tight">
+                Digvijay Ware
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-mono bg-[#a7c4b5]/20 dark:bg-[#a7c4b5]/15 text-[#3d5a49] dark:text-[#a7c4b5]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7a9d8a]" />
+                Summer '26
+              </span>
             </div>
           </a>
 
-          {/* Desktop Nav Links */}
-          <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Minimalist Desktop Navigation */}
+          <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-6">
             {navLinks.map(link => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={handleLinkClick}
-                className="px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors"
+                className="text-xs font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
-          {/* Right Action Icons & Controls */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            {/* AI Copilot Button */}
+          {/* Minimalist Controls */}
+          <div className="flex items-center gap-2">
+            {/* AI Copilot in soft pastel lavender */}
             <button
               onClick={() => {
                 soundFX.playClick();
                 onOpenCopilot();
               }}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-500/40 text-cyan-300 text-xs font-medium transition-all shadow-sm shadow-cyan-500/10 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#d4c2fc]/20 dark:bg-[#d4c2fc]/15 hover:bg-[#d4c2fc]/30 text-[#543b7e] dark:text-[#d4c2fc] text-xs font-medium transition-colors"
               title="Career Copilot AI with Gemini Thinking Mode"
             >
-              <Bot className="w-3.5 h-3.5 text-cyan-400" />
+              <Sparkles className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">AI Copilot</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
             </button>
 
-            {/* Unit Tests Runner Button */}
+            {/* System Tests */}
             <button
               onClick={() => {
                 soundFX.playClick();
                 onOpenTests();
               }}
-              className="hidden md:flex items-center gap-1 px-2 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-slate-300 text-xs font-mono transition-colors"
-              title="Run Code & Algorithm Unit Tests"
+              className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 text-xs font-mono transition-colors"
+              title="Run Unit Tests"
             >
-              <CheckSquare className="w-3.5 h-3.5 text-emerald-400" />
+              <CheckSquare className="w-3.5 h-3.5" />
               <span>Tests</span>
             </button>
 
-            {/* Recruiter Auth Portal Button */}
+            {/* Recruiter Auth */}
             <button
               onClick={() => {
                 soundFX.playClick();
                 onOpenAuth();
               }}
-              className={`p-1.5 rounded-xl border text-xs transition-colors ${
+              className={`p-1.5 rounded-lg border text-xs transition-colors ${
                 isAuthenticated
-                  ? 'bg-emerald-950/50 text-emerald-300 border-emerald-500/40'
-                  : 'bg-slate-900 text-slate-300 border-slate-700 hover:border-cyan-500/50'
+                  ? 'border-[#a7c4b5] bg-[#a7c4b5]/15 text-[#3d5a49] dark:text-[#a7c4b5]'
+                  : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
               }`}
-              title={isAuthenticated ? 'Verified Recruiter Session Active' : 'Recruiter Secure Access Portal'}
+              title={isAuthenticated ? 'Verified Recruiter Session' : 'Recruiter Access'}
             >
-              <Shield className="w-4 h-4" />
+              <Shield className="w-3.5 h-3.5" />
             </button>
 
-            {/* Dark Mode Toggle */}
+            {/* Dark / Light Mode Toggle */}
             <button
               onClick={() => {
                 soundFX.playClick();
                 onToggleDarkMode();
               }}
-              className="p-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-amber-300 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              aria-label="Toggle Dark/Light Mode"
+              className="p-1.5 rounded-lg border border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+              aria-label="Toggle theme"
             >
-              {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-400" />}
+              {darkMode ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </button>
 
-            {/* Mobile Hamburger Menu Toggle */}
+            {/* Mobile Hamburger Menu */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-1.5 rounded-xl bg-slate-900 text-slate-400 hover:text-slate-100 hover:bg-slate-800 border border-slate-700"
-              aria-label="Open Mobile Menu"
+              className="md:hidden p-1.5 rounded-lg border border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400"
+              aria-label="Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
+
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Nav */}
         {mobileMenuOpen && (
-          <nav aria-label="Mobile Navigation" className="lg:hidden py-3 px-2 border-t border-slate-800 bg-slate-950/95 space-y-1 animate-fadeIn">
+          <nav aria-label="Mobile Navigation" className="md:hidden py-3 border-t border-stone-200 dark:border-stone-800 space-y-1">
             {navLinks.map(link => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={handleLinkClick}
-                className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition-colors"
+                className="block px-3 py-2 text-sm text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white"
               >
                 {link.name}
               </a>
             ))}
-            <div className="pt-2 border-t border-slate-800 flex items-center justify-between px-3">
+            <div className="pt-2 border-t border-stone-200 dark:border-stone-800 px-3 flex gap-3">
               <button
                 onClick={() => {
                   handleLinkClick();
                   onOpenTests();
                 }}
-                className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-emerald-400 font-mono"
+                className="text-xs font-mono text-stone-600 dark:text-stone-400"
               >
-                <CheckSquare className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Run System Tests</span>
+                Unit Tests
               </button>
               <button
                 onClick={() => {
                   handleLinkClick();
                   onOpenCopilot();
                 }}
-                className="flex items-center gap-1.5 text-xs text-cyan-400 font-semibold"
+                className="text-xs font-medium text-[#543b7e] dark:text-[#d4c2fc]"
               >
-                <Bot className="w-3.5 h-3.5" />
-                <span>Ask AI Copilot</span>
+                AI Copilot
               </button>
             </div>
           </nav>
