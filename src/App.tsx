@@ -101,6 +101,31 @@ export default function App() {
     }
   }, [authToken]);
 
+  // Global subtle tactile audio feedback for hovering and clicking buttons
+  useEffect(() => {
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest('button, a, [role="button"], input[type="submit"], input[type="button"]')) {
+        soundFX.playHover();
+      }
+    };
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest('button, a, [role="button"], input[type="submit"], input[type="button"]')) {
+        soundFX.playClick();
+      }
+    };
+
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
+
   // Unlock Quest handler
   const handleUnlockQuest = (questId: string) => {
     setQuests(prev =>

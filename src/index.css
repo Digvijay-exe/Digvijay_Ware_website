@@ -18,9 +18,9 @@
   }
 }
 
-/* Eliminate scroll animations for a static, clean, responsive feel */
+/* Smooth scroll for seamless navigation throughout the website */
 html {
-  scroll-behavior: auto !important;
+  scroll-behavior: smooth !important;
 }
 
 /* Subtle, minimal scrollbars */
