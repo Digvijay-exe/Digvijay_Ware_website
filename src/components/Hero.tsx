@@ -1,27 +1,22 @@
 import React from 'react';
-import { PERSONAL_INFO } from '../data/resumeData';
-import { ThreeCanvas } from './ThreeCanvas';
+import { PERSONAL_INFO, PROJECTS } from '../data/resumeData';
 import { soundFX } from '../utils/audio';
-import { Github, Linkedin, Mail, Phone, Download, ArrowRight, Sparkles } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, Download, ArrowRight, Sparkles, GraduationCap, Code2, Database } from 'lucide-react';
 
 interface HeroProps {
   onDownloadResume: () => void;
   onOpenCopilot: () => void;
-  reducedMotion: boolean;
-  onToggleReducedMotion: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   onDownloadResume,
-  onOpenCopilot,
-  reducedMotion,
-  onToggleReducedMotion
+  onOpenCopilot
 }) => {
   return (
-    <section id="about" className="pt-8 pb-16 md:pt-14 md:pb-24">
+    <section id="about" className="pt-10 pb-16 md:pt-16 md:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
           {/* Left: Editorial Bio */}
           <div className="lg:col-span-7 space-y-6">
@@ -38,7 +33,7 @@ export const Hero: React.FC<HeroProps> = ({
                 Digvijay Madhav Ware
               </h1>
               <p className="text-lg sm:text-xl text-stone-500 dark:text-stone-400 font-light">
-                Undergraduate engineer focused on C++, algorithms, and applied machine vision.
+                Undergraduate engineer focused on C++, systems, and applied machine vision.
               </p>
             </div>
 
@@ -133,21 +128,61 @@ export const Hero: React.FC<HeroProps> = ({
 
           </div>
 
-          {/* Right: Three.js Minimalist Pastel 3D Canvas */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-stone-200/80 dark:border-stone-800/80 bg-stone-100/40 dark:bg-stone-900/30 p-2 relative">
-              <div className="flex items-center justify-between px-3 py-1.5 border-b border-stone-200/60 dark:border-stone-800/60 text-[11px] font-mono text-stone-400">
-                <span>geometric_core</span>
-                <button
-                  onClick={onToggleReducedMotion}
-                  className="hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
-                >
-                  {reducedMotion ? 'Resume' : 'Pause'}
-                </button>
+          {/* Right: Minimalist Static Editorial Profile Card (No geometric core animation) */}
+          <div className="lg:col-span-5 space-y-4">
+            
+            {/* Academic Standing Card */}
+            <div className="rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 p-6 space-y-4">
+              <div className="flex items-center justify-between text-xs font-mono text-stone-500">
+                <span className="flex items-center gap-1.5">
+                  <GraduationCap className="w-4 h-4 text-[#a7c4b5]" />
+                  <span>Academic Profile</span>
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] bg-[#a7c4b5]/20 text-[#3d5a49] dark:text-[#a7c4b5]">
+                  2024 &ndash; 2028
+                </span>
               </div>
 
-              <ThreeCanvas reducedMotion={reducedMotion} />
+              <div>
+                <h3 className="text-base font-medium text-stone-900 dark:text-stone-100">
+                  MIT World Peace University (MIT WPU)
+                </h3>
+                <p className="text-xs text-stone-500 dark:text-stone-400 font-mono mt-0.5">
+                  Pune, Maharashtra, India
+                </p>
+                <p className="text-xs text-stone-700 dark:text-stone-300 mt-2 font-mono">
+                  B.Tech in Computer Science and Engineering
+                </p>
+                <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">
+                  Current Status: 3rd Year &bull; Focus: Software Engineering, DBMS &amp; Applied AI
+                </p>
+              </div>
             </div>
+
+            {/* Core Project Highlights Preview */}
+            <div className="rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 p-6 space-y-4">
+              <div className="text-xs font-mono uppercase tracking-wider text-stone-500">
+                Flagship Systems
+              </div>
+
+              <div className="space-y-3">
+                {PROJECTS.map(project => (
+                  <div
+                    key={project.id}
+                    className="p-3.5 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white/70 dark:bg-stone-950/50 space-y-1.5"
+                  >
+                    <div className="flex items-center justify-between text-xs font-medium text-stone-900 dark:text-stone-100">
+                      <span>{project.title} &ndash; {project.subtitle}</span>
+                      <span className="text-[10px] font-mono text-stone-400">{project.year}</span>
+                    </div>
+                    <div className="text-[11px] font-mono text-stone-500">
+                      {project.tags.join(' &bull; ')}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
 
         </div>

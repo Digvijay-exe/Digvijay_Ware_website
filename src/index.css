@@ -11,6 +11,18 @@
   }
 }
 
+/* Hide native cursor on desktop to use custom cursor */
+@media (pointer: fine) {
+  html, body, *, *::before, *::after, a, button, input, textarea, select {
+    cursor: none !important;
+  }
+}
+
+/* Eliminate scroll animations for a static, clean, responsive feel */
+html {
+  scroll-behavior: auto !important;
+}
+
 /* Subtle, minimal scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
@@ -32,9 +44,10 @@
   body {
     background: #ffffff !important;
     color: #000000 !important;
+    cursor: auto !important;
   }
 
-  .no-print, nav, footer, button, .gamified-hud, #canvas3d-container, .interactive-banner {
+  .custom-cursor, .no-print, nav, footer, button, .gamified-hud, #canvas3d-container, .interactive-banner {
     display: none !important;
   }
 
@@ -47,4 +60,3 @@
     color: #1c1917 !important;
   }
 }
-

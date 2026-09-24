@@ -15,6 +15,7 @@ import { ResumeDownloadSection } from './components/ResumeDownloadSection';
 import { ContactFormSection } from './components/ContactFormSection';
 import { Footer } from './components/Footer';
 import { GamifiedHUD } from './components/GamifiedHUD';
+import { CustomCursor } from './components/CustomCursor';
 import { RecruiterAuthModal } from './components/RecruiterAuthModal';
 import { RecruiterCopilotModal } from './components/RecruiterCopilotModal';
 import { UnitTestsRunnerModal } from './components/UnitTestsRunnerModal';
@@ -26,7 +27,7 @@ export default function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('dw_theme');
     if (saved) return saved === 'dark';
-    return true; // Default to dark cyberpunk aesthetic
+    return true;
   });
 
   // Gamification Quests & XP state
@@ -42,17 +43,9 @@ export default function App() {
     return INITIAL_QUESTS;
   });
 
-  // Fast Mode for Recruiters (minimalist mode without gamification HUD)
+  // Fast Mode for Recruiters
   const [fastMode, setFastMode] = useState<boolean>(() => {
     return localStorage.getItem('dw_fast_mode') === 'true';
-  });
-
-  // Reduced motion for accessibility
-  const [reducedMotion, setReducedMotion] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    }
-    return false;
   });
 
   // Modals state
@@ -133,11 +126,6 @@ export default function App() {
     });
   };
 
-  const handleToggleReducedMotion = () => {
-    soundFX.playClick();
-    setReducedMotion(prev => !prev);
-  };
-
   const handleLoginSuccess = (token: string, user: RecruiterUser) => {
     setAuthToken(token);
     setAuthUser(user);
@@ -157,6 +145,9 @@ export default function App() {
   return (
     <div className={`min-h-screen transition-colors duration-200 ${darkMode ? 'dark bg-[#141416] text-stone-100' : 'bg-[#FAF9F6] text-stone-900'}`}>
       
+      {/* Custom Cursor which replaces the native cursor on desktop */}
+      <CustomCursor />
+
       {/* Top Navigation */}
       <Navbar
         darkMode={darkMode}
@@ -167,7 +158,7 @@ export default function App() {
         isAuthenticated={!!authToken}
       />
 
-      {/* Gamified Recruiter HUD (can be toggled or minimized in Fast Mode) */}
+      {/* Gamified Recruiter HUD (can be toggled in Fast Mode) */}
       {!fastMode && (
         <GamifiedHUD
           quests={quests}
@@ -182,12 +173,10 @@ export default function App() {
 
       {/* Main Content Area */}
       <main id="main-content">
-        {/* Hero Section with Three.js 3D kinetic canvas */}
+        {/* Hero Section */}
         <Hero
           onDownloadResume={downloadResumePDF}
           onOpenCopilot={() => setIsCopilotOpen(true)}
-          reducedMotion={reducedMotion}
-          onToggleReducedMotion={handleToggleReducedMotion}
         />
 
         {/* Flagship Projects Section (Pulse Kinematics & InkLite KMP/Boyer-Moore) */}
@@ -196,7 +185,7 @@ export default function App() {
         {/* Technical Skills Matrix */}
         <SkillsSection />
 
-        {/* Experience, Hackathons & Course Certifications */}
+        {/* Experience & Hackathons */}
         <ExperienceHackathonsSection onUnlockQuest={handleUnlockQuest} />
 
         {/* Downloadable Resume in PDF Format & Document Preview */}
