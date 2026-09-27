@@ -245,14 +245,18 @@ TECHNICAL SKILLS:
 - Core Concepts: Object-Oriented Programming (OOP), File I/O, Socket Programming, Software Development
 
 FEATURED PROJECTS:
-1. "Pulse – Real-Time Collaborative Platform" (C++ | Data Structures | Socket Programming | 2026):
-   - Kinematic Fatigue Tracker utilizing accelerometer and gyroscope sensor telemetry.
-   - Detects exercise repetitions, estimates movement velocity, computes velocity loss, and provides real-time fatigue alerts.
-   - Key engineering: Implemented automatic 3-rep calibration, confidence-based rep detection, and haptic alerts when velocity loss exceeds threshold.
-2. "InkLite – Lightweight Text & Note Processing Engine" (C++ | Data Structures | OOP | File I/O | 2026):
-   - High-efficiency text processing engine built for ultra-fast startup and minimal memory footprint.
-   - Implemented KMP and Boyer-Moore string-search algorithms for O(N+M) and sublinear text search across large files.
-   - Developed modular file management and structured document processing using clean OOP principles.
+1. "Pulse – Real-Time Collaborative Platform" (2026 | C++, Data Structures, Socket Programming):
+   - Developed a real-time collaborative platform using C++ and socket programming for network-based communication and concurrent client interactions.
+   - Implemented data structures and modular client-server communication components for efficient real-time data exchange.
+   - GitHub: https://github.com/Digvijay-exe/Pulse
+2. "InkLite – Lightweight Text & Note Processing Engine" (2026 | C++, Data Structures, OOP, File I/O):
+   - Built a lightweight text and note processing engine using C++ and object-oriented design principles.
+   - Implemented efficient data structures and file I/O operations for creating, reading, modifying, and managing text data.
+   - GitHub: https://github.com/Digvijay-exe/InkLite
+3. "Pipboy Assistant – AI-Powered Desktop Assistant" (2026 | Python, Tkinter, Groq API, Threading):
+   - Developed a Python-based desktop AI assistant with a Tkinter GUI and real-time LLM-powered responses through the Groq API.
+   - Implemented threaded API interactions for responsive, non-blocking user experience with an extensible architecture for future local-model integration.
+   - GitHub: https://github.com/Digvijay-exe/Pipboy-Assistant
 
 EXPERIENCE & LEADERSHIP:
 - Campus Ambassador – SHEIN India (Pune, Summer 2026): Student outreach, brand engagement, campus promotional initiatives, and peer engagement.

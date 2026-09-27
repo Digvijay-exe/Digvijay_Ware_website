@@ -6,24 +6,14 @@
 import React, { useState, useEffect } from 'react';
 import { INITIAL_QUESTS } from './data/resumeData';
 import { Quest, RecruiterUser } from './types';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { ProjectsSection } from './components/ProjectsSection';
-import { SkillsSection } from './components/SkillsSection';
-import { ExperienceHackathonsSection } from './components/ExperienceHackathonsSection';
-import { ResumeDownloadSection } from './components/ResumeDownloadSection';
-import { ContactFormSection } from './components/ContactFormSection';
-import { Footer } from './components/Footer';
-import { GamifiedHUD } from './components/GamifiedHUD';
-import { CustomCursor } from './components/CustomCursor';
+import { ParallaxPortfolioSite } from './components/ParallaxPortfolioSite';
 import { RecruiterAuthModal } from './components/RecruiterAuthModal';
 import { RecruiterCopilotModal } from './components/RecruiterCopilotModal';
 import { UnitTestsRunnerModal } from './components/UnitTestsRunnerModal';
-import { downloadResumePDF } from './utils/pdfGenerator';
 import { soundFX } from './utils/audio';
 
 export default function App() {
-  // Dark mode state
+  // Dark mode state (Parallax Strip Slider is designed in high-contrast cinematic dark theme)
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('dw_theme');
     if (saved) return saved === 'dark';
@@ -41,11 +31,6 @@ export default function App() {
       }
     }
     return INITIAL_QUESTS;
-  });
-
-  // Fast Mode for Recruiters
-  const [fastMode, setFastMode] = useState<boolean>(() => {
-    return localStorage.getItem('dw_fast_mode') === 'true';
   });
 
   // Modals state
@@ -70,38 +55,7 @@ export default function App() {
     }
   }, [darkMode]);
 
-  // Persist quests
-  useEffect(() => {
-    localStorage.setItem('dw_quests', JSON.stringify(quests));
-  }, [quests]);
-
-  // Verify auth token on initial load
-  useEffect(() => {
-    if (authToken) {
-      fetch('/api/auth/verify', {
-        headers: { Authorization: `Bearer ${authToken}` }
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.authenticated && data.user) {
-            setAuthUser({
-              name: data.user.name,
-              company: data.user.company,
-              role: data.user.role,
-              confidentialData: data.user.confidentialData
-            });
-          } else {
-            setAuthToken(null);
-            localStorage.removeItem('dw_auth_token');
-          }
-        })
-        .catch(() => {
-          // Keep offline session
-        });
-    }
-  }, [authToken]);
-
-  // Global subtle tactile audio feedback for hovering and clicking buttons
+  // Global subtle tactile audio feedback for hovering and clicking interactive elements
   useEffect(() => {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
@@ -138,19 +92,6 @@ export default function App() {
     );
   };
 
-  const handleToggleDarkMode = () => {
-    setDarkMode(prev => !prev);
-  };
-
-  const handleToggleFastMode = () => {
-    soundFX.playClick();
-    setFastMode(prev => {
-      const next = !prev;
-      localStorage.setItem('dw_fast_mode', next.toString());
-      return next;
-    });
-  };
-
   const handleLoginSuccess = (token: string, user: RecruiterUser) => {
     setAuthToken(token);
     setAuthUser(user);
@@ -164,70 +105,18 @@ export default function App() {
     localStorage.removeItem('dw_auth_token');
   };
 
-  // Calculate total XP
-  const totalXP = quests.reduce((acc, q) => acc + (q.completed ? q.xp : 0), 0);
-
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${darkMode ? 'dark bg-[#141416] text-stone-100' : 'bg-[#FAF9F6] text-stone-900'}`}>
+    <div className="h-screen w-screen overflow-hidden bg-black text-white select-none">
       
-      {/* Custom Cursor which replaces the native cursor on desktop */}
-      <CustomCursor />
-
-      {/* Top Navigation */}
-      <Navbar
-        darkMode={darkMode}
-        onToggleDarkMode={handleToggleDarkMode}
+      {/* Primary Parallax Strip Slider Portfolio Experience */}
+      <ParallaxPortfolioSite
         onOpenCopilot={() => setIsCopilotOpen(true)}
-        onOpenTests={() => setIsTestsOpen(true)}
         onOpenAuth={() => setIsAuthOpen(true)}
+        onOpenTests={() => setIsTestsOpen(true)}
         isAuthenticated={!!authToken}
       />
 
-      {/* Gamified Recruiter HUD (can be toggled in Fast Mode) */}
-      {!fastMode && (
-        <GamifiedHUD
-          quests={quests}
-          totalXP={totalXP}
-          fastMode={fastMode}
-          onToggleFastMode={handleToggleFastMode}
-          onOpenAuth={() => setIsAuthOpen(true)}
-          isAuthenticated={!!authToken}
-          recruiterCompany={authUser?.company}
-        />
-      )}
-
-      {/* Main Content Area */}
-      <main id="main-content">
-        {/* Hero Section */}
-        <Hero
-          onDownloadResume={downloadResumePDF}
-          onOpenCopilot={() => setIsCopilotOpen(true)}
-        />
-
-        {/* Flagship Projects Section (Pulse Kinematics & InkLite KMP/Boyer-Moore) */}
-        <ProjectsSection onUnlockQuest={handleUnlockQuest} />
-
-        {/* Technical Skills Matrix */}
-        <SkillsSection />
-
-        {/* Experience & Hackathons */}
-        <ExperienceHackathonsSection onUnlockQuest={handleUnlockQuest} />
-
-        {/* Downloadable Resume in PDF Format & Document Preview */}
-        <ResumeDownloadSection onUnlockQuest={handleUnlockQuest} />
-
-        {/* Automated Employer Contact Desk */}
-        <ContactFormSection onUnlockQuest={handleUnlockQuest} />
-      </main>
-
-      {/* Footer */}
-      <Footer
-        onOpenCopilot={() => setIsCopilotOpen(true)}
-        onOpenTests={() => setIsTestsOpen(true)}
-        onOpenAuth={() => setIsAuthOpen(true)}
-      />
-
-      {/* Modals */}
+      {/* Recruiter Authentication Modal */}
       <RecruiterAuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
@@ -237,12 +126,14 @@ export default function App() {
         onLogout={handleLogout}
       />
 
+      {/* AI Recruiter Copilot Modal */}
       <RecruiterCopilotModal
         isOpen={isCopilotOpen}
         onClose={() => setIsCopilotOpen(false)}
         onUnlockQuest={handleUnlockQuest}
       />
 
+      {/* Embedded Unit Tests Runner Modal */}
       <UnitTestsRunnerModal
         isOpen={isTestsOpen}
         onClose={() => setIsTestsOpen(false)}

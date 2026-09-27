@@ -101,6 +101,14 @@ class SoundFX {
       });
     } catch {}
   }
+
+  playSuccess() {
+    this.playQuestComplete();
+  }
+
+  playOpen() {
+    this.playClick();
+  }
 }
 
 export const soundFX = new SoundFX();
