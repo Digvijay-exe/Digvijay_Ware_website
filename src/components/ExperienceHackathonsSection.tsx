@@ -82,6 +82,21 @@ export const ExperienceHackathonsSection: React.FC<ExperienceHackathonsSectionPr
                 </button>
               </div>
 
+              {/* Hackathons Award Banner */}
+              <div className="relative w-full h-44 rounded-xl overflow-hidden mb-4 border border-stone-200 dark:border-stone-800 shadow-sm group">
+                <img
+                  src="/hackathon_stage_award.jpg"
+                  alt="Smart India Hackathon 2026 Stage Ceremony"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-3">
+                  <span className="text-[11px] font-mono text-stone-200">
+                    Smart India Hackathon 2026 &bull; Certificate of Merit Ceremony
+                  </span>
+                </div>
+              </div>
+
               <div className="space-y-3">
                 {HACKATHONS.map((h, idx) => (
                   <div

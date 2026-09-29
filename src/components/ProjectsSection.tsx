@@ -52,8 +52,18 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onUnlockQuest 
             return (
               <div
                 key={project.id}
-                className={`rounded-2xl border ${accent.border} border-stone-200 dark:border-stone-800 bg-stone-100/40 dark:bg-stone-900/30 p-6 flex flex-col justify-between hover:border-stone-400 dark:hover:border-stone-700 transition-all duration-200`}
+                className={`rounded-2xl border ${accent.border} border-stone-200 dark:border-stone-800 bg-stone-100/40 dark:bg-stone-900/30 p-6 flex flex-col justify-between hover:border-stone-400 dark:hover:border-stone-700 transition-all duration-200 overflow-hidden`}
               >
+                {project.imageUrl && (
+                  <div className="relative w-full h-36 -mx-6 -mt-6 mb-4 overflow-hidden border-b border-stone-200/60 dark:border-stone-800/60">
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                )}
                 <div className="space-y-4">
                   {/* Category Header */}
                   <div className="flex items-center justify-between">

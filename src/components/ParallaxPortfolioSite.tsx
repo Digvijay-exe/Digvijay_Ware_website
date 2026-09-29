@@ -66,7 +66,7 @@ export const ParallaxPortfolioSite: React.FC<ParallaxPortfolioSiteProps> = ({
 
     // Partition 02: Pulse – Real-Time Collaborative Platform
     {
-      src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop",
+      src: "/pulse_fatigue_tracker.jpg",
       title: "Pulse Platform",
       chapter: "Partition 02 // Flagship Project",
       category: "Concurrent Distributed Systems",
@@ -83,7 +83,7 @@ export const ParallaxPortfolioSite: React.FC<ParallaxPortfolioSiteProps> = ({
 
     // Partition 03: InkLite – Lightweight Text & Note Processing Engine
     {
-      src: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2000&auto=format&fit=crop",
+      src: "/inklite_tablet_notes.jpg",
       title: "InkLite Engine",
       chapter: "Partition 03 // Core Architecture",
       category: "Text Processing & File I/O",
@@ -100,7 +100,7 @@ export const ParallaxPortfolioSite: React.FC<ParallaxPortfolioSiteProps> = ({
 
     // Partition 04: Pipboy Assistant – AI-Powered Desktop Assistant
     {
-      src: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop",
+      src: "/pipboy_assistant_bg.jpg",
       title: "Pipboy Assistant",
       chapter: "Partition 04 // Applied AI",
       category: "Desktop AI & Multi-Threading",
@@ -117,7 +117,7 @@ export const ParallaxPortfolioSite: React.FC<ParallaxPortfolioSiteProps> = ({
 
     // Partition 05: Smart India Hackathon & Competitions (Achievements)
     {
-      src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop",
+      src: "/hackathon_stage_award.jpg",
       title: "Hackathons & Honors",
       chapter: "Partition 05 // Competitive Achievements",
       category: "National Level Competitions",
@@ -400,14 +400,6 @@ export const ParallaxPortfolioSite: React.FC<ParallaxPortfolioSiteProps> = ({
             <Mail className="size-3.5" />
             <span className="hidden sm:inline">Email</span>
           </a>
-        </div>
-
-        {/* Right: Keyboard Tip */}
-        <div className="pointer-events-auto hidden md:flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-[11px] font-mono text-white/60">
-          <span>Navigate:</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-white/15 text-white text-[10px]">Left / Right Click</kbd>
-          <span>or</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-white/15 text-white text-[10px]">&larr; &rarr; Keys</kbd>
         </div>
       </footer>
 

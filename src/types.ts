@@ -10,6 +10,7 @@ export interface Project {
   githubUrl: string;
   highlightStat: string;
   category: 'systems' | 'algorithms' | 'ai';
+  imageUrl?: string;
 }
 
 export interface SkillCategory {

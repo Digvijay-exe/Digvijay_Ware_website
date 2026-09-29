@@ -36,7 +36,8 @@ export const PROJECTS: Project[] = [
     ],
     githubUrl: 'https://github.com/Digvijay-exe/Pulse',
     highlightStat: 'Concurrent Client-Server Architecture',
-    category: 'systems'
+    category: 'systems',
+    imageUrl: '/pulse_fatigue_tracker.jpg'
   },
   {
     id: 'inklite',
@@ -53,7 +54,8 @@ export const PROJECTS: Project[] = [
     ],
     githubUrl: 'https://github.com/Digvijay-exe/InkLite',
     highlightStat: 'Optimized Memory & File I/O',
-    category: 'algorithms'
+    category: 'algorithms',
+    imageUrl: '/inklite_tablet_notes.jpg'
   },
   {
     id: 'pipboy',
@@ -70,7 +72,8 @@ export const PROJECTS: Project[] = [
     ],
     githubUrl: 'https://github.com/Digvijay-exe/Pipboy-Assistant',
     highlightStat: 'Non-Blocking Threaded LLM UI',
-    category: 'ai'
+    category: 'ai',
+    imageUrl: '/pipboy_assistant_bg.jpg'
   }
 ];
 
